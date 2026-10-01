@@ -1,0 +1,91 @@
+/* Each weather mood only redefines these colour variables. */
+:root, [data-theme="fallback"] {
+  --bg: #e3ebe7; --surface: #f7faf8; --text: #1f3a33; --muted: #5d7770; --accent: #2f7d6b; --on-accent: #fff; --line: #c9d8d2;
+}
+[data-theme="sunny"]  { --bg: #ffd86b; --surface: #fff6d9; --text: #4a2f00; --muted: #8a6420; --accent: #e8590c; --on-accent: #fff; --line: #f0cd7a; }
+[data-theme="cloudy"] { --bg: #cfd8e3; --surface: #eef2f7; --text: #243241; --muted: #5d6e80; --accent: #466a94; --on-accent: #fff; --line: #bcc8d6; }
+[data-theme="rainy"]  { --bg: #1d3a57; --surface: #28496b; --text: #e8f3fc; --muted: #9dbbd6; --accent: #7cc8ff; --on-accent: #0b2238; --line: #3a5f86; }
+[data-theme="stormy"] { --bg: #15151f; --surface: #232333; --text: #ececf6; --muted: #9a9ab5; --accent: #ffd23f; --on-accent: #1a1a1a; --line: #37374d; }
+[data-theme="snowy"]  { --bg: #dcecf8; --surface: #ffffff; --text: #16324a; --muted: #5b7a94; --accent: #2b86c9; --on-accent: #fff; --line: #c3dbee; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+.app { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; display: grid; gap: 18px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  transition: background-color 0.8s ease, border-color 0.8s ease;
+}
+
+/* Weather card */
+.city-form { display: flex; gap: 8px; margin-bottom: 14px; }
+.city-form input { flex: 1; min-width: 0; }
+.reading { display: flex; align-items: center; gap: 18px; }
+.icon { font-size: 4.5rem; line-height: 1; }
+.temp { font-size: 3.2rem; font-weight: 800; margin: 0; line-height: 1; }
+.where { font-size: 1.15rem; font-weight: 600; margin: 6px 0 0; }
+.cond { margin: 2px 0 0; text-transform: capitalize; }
+.extra { margin: 4px 0 0; color: var(--muted); font-size: 0.9rem; }
+
+/* Title + message */
+.hero { text-align: center; padding: 6px 0; }
+h1 { font-size: clamp(2rem, 7vw, 3rem); font-weight: 800; margin: 0; letter-spacing: -0.02em; }
+.mood-message { margin: 8px 0 0; font-size: 1.1rem; color: var(--muted); }
+
+/* Todo */
+.todo-form { display: flex; gap: 8px; }
+.todo-form input { flex: 1; min-width: 0; }
+.counter { margin: 14px 0 6px; color: var(--muted); }
+.empty { color: var(--muted); text-align: center; padding: 18px 0 6px; }
+.todo-list { list-style: none; margin: 0; padding: 0; }
+.todo-list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 0; border-top: 1px solid var(--line);
+}
+.todo-list label { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; cursor: pointer; overflow-wrap: anywhere; }
+.todo-list input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex-shrink: 0; }
+.todo-list li.done span { text-decoration: line-through; color: var(--muted); }
+
+/* Controls */
+input[type="text"], input:not([type]) {
+  font: inherit; padding: 10px 12px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--text);
+}
+.btn {
+  font: inherit; font-weight: 600; padding: 10px 14px; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--line); background: transparent; color: var(--text);
+}
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.btn.ghost { color: var(--muted); }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.error { color: #c92a2a; margin: 8px 0 0; font-weight: 600; }
+[data-theme="rainy"] .error, [data-theme="stormy"] .error { color: #ff9b9b; }
+
+/* Mood preview */
+.preview { text-align: center; color: var(--muted); font-size: 0.9rem; }
+.preview p { margin: 0 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.chip { font: inherit; padding: 6px 12px; border-radius: 999px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+.chip.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+@media (max-width: 480px) {
+  .city-form { flex-wrap: wrap; }
+  .city-form input { flex-basis: 100%; }
+  .icon { font-size: 3.5rem; }
+  .temp { font-size: 2.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body, .card { transition: none; }
+}

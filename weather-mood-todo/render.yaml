@@ -1,0 +1,12 @@
+# Optional: Render "Blueprint" for a static site deployment.
+services:
+  - type: web
+    name: weather-mood-todo
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_OPENWEATHER_API_KEY
+        sync: false
+      - key: VITE_DEFAULT_CITY
+        value: London
